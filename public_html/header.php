@@ -20,7 +20,7 @@ $logout->startPrecess();
     <div class='menu-wrapper-left'>
         <ul>
             <li><a href="home.php">ホーム</a></li>
-            <li><a href="">相手を探す</a></li>
+            <li><a href="addEvent.php">イベント作成</a></li>
             <?= isset($_SESSION['user']) ? '<li><form method="post"><input type="submit" name="logout-button" value="LOGOUT"></form></li>' : ''?>
         </ul>   
     </div>

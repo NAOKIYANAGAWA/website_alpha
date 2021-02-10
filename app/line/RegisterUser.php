@@ -6,8 +6,9 @@ class RegisterUser extends \app\models\PDO {
     public function registerUser($userInfo) {
 
         // 新規ユーザーか確認
-        if ($this->isUser($userInfo)) { //既存ユーザーならhomeへ
+        if ($result = $this->isUser($userInfo)) { //既存ユーザーならhomeへ
             $_SESSION['user'] = $userInfo;
+            $_SESSION['user']['id'] = $result[0]['id'];
             header('Location: ' . SITE_URL);
             exit;
         } else { //新規ユーザーならDBへ登録
@@ -39,10 +40,10 @@ class RegisterUser extends \app\models\PDO {
         $stmt->execute([
             ':userId' => $userInfo['userId']
             ]);
-        $result = $stmt->fetchAll();
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         
         if (count($result) > 0) {
-            return true;
+            return $result;
         } 
 
     }
