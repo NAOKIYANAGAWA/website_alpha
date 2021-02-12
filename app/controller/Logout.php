@@ -3,7 +3,7 @@ namespace app\controller;
 
 class Logout extends \app\controller\Controller {
     
-    public function startPrecess() {
+    public function startProcess() {
       if (isset($_POST['logout-button'])) { 
           $this->logout();
       }

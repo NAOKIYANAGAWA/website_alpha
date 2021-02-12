@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '/../config/config.php');
 $postEvent = new \app\controller\PostEvent();
-$postEvent->startProccess();
+$postEvent->startProcess();
 ?>
 
 <?php require('./header.php') ?>
@@ -14,6 +14,7 @@ $postEvent->startProccess();
                 <input type="date" name='match[date]'>
                 <input type="text" name='match[place]' placeholder='場所'>
                 <input type="text" name='match[level]' placeholder='レベル'>
+                <input type="text" name='match[price]' placeholder='参加費'>
                 <button type='submit'>作成</i></button>
             </form>
         </div>
@@ -27,8 +28,9 @@ $postEvent->startProccess();
 
 <style>
 .add-event-wrapper {
-    width: 90%;
+    width: 50%;
     height: 100%;
+    min-width: 300px;
     margin: 50px auto;
     background: rgba(0,0,0,0.3);
 }
@@ -37,10 +39,11 @@ $postEvent->startProccess();
 }
 .add-event-inner form {
     display: block;
-    max-width: 300px;
+    /* max-width: 300px; */
+    margin: 0px;
 }
 .add-event-inner input {
-    width: 300px;
+    width: 100%;
     margin-top: 20px;
     border: 0px;
     border-bottom: 3px solid #fff;

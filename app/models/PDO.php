@@ -23,9 +23,14 @@ class PDO {
   }
 
   protected function insert($sql,$values) {
-    $sql = $sql;
     $stmt = $this->db->prepare($sql);
     $stmt->execute($values);
+  }
+
+  protected function selectAll($sql) {
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
   
 }

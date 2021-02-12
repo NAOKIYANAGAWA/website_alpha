@@ -36,9 +36,7 @@ require_once(__DIR__ . '/../config/config.php');
 <?php require('./footer.php') ?>
 
 <style>
-body {
-  background: #fff;
-}
+
 .mypage {
     display: flex;
     justify-content: center;

@@ -4,14 +4,17 @@ namespace app\models;
 class PostEventSQL extends \app\models\PDO {
 
     protected function transferValue($values) {
+        // print_r($values);
+        // exit;
+        $sql = 'INSERT INTO event (event_date, event_place, event_level, event_price, event_host, registered_date) 
+                VALUES (:event_date, :event_place, :event_level, :event_price, :event_host, now())';
 
-        $sql = 'INSERT INTO event (event_date, event_place, event_level, registered_date) 
-                VALUES (:event_date, :event_place, :event_level, now())';
-                
         $values = [
-            ':event_date' => $values['event_date'],
-            ':event_place' => $values['event_place'],
-            ':event_level' => $values['event_level']
+            ':event_date' => $values['date'],
+            ':event_place' => $values['place'],
+            ':event_level' => $values['level'],
+            ':event_price' => $values['price'],
+            ':event_host' => $_SESSION['user']['id']
         ];
         
         try {
