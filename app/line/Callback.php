@@ -10,7 +10,7 @@ class Callback {
     $userInfo = $this->getUserInfo($token);
 
     $registerUser = new \app\line\RegisterUser();
-
+    
     $registerUser->registerUser($userInfo);
     // print_r($userInfo);
   }

@@ -4,7 +4,7 @@ namespace app\line;
 class RegisterUser extends \app\models\PDO {
 
     public function registerUser($userInfo) {
-
+            
         // 新規ユーザーか確認
         if ($result = $this->isUser($userInfo)) { //既存ユーザーならhomeへ
             $_SESSION['user'] = $userInfo;

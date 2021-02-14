@@ -1,4 +1,7 @@
-<?php 
+<?php
+require_once(__DIR__ . '/../config/config.php');
+require('../vendor/autoload.php');
+
 $accessToken = 'q+wiEpkneJb16gNwTnimirjgF9+MTUM580wemvPy4ucgLvv0bDTG+/LL9z7OAAGTJmVNB9NX96F5ZO5X3IK1t5hYiDdeIFnBDh5fQVoRNfYXfZmiU2AGErLMZ1AhewJofUm/Goj2Rhgx2iU7014rkwdB04t89/1O/w1cDnyilFU='; 
 $jsonString = file_get_contents('php://input'); error_log($jsonString); 
 $jsonObj = json_decode($jsonString); $message = $jsonObj->{"events"}[0]->{"message"}; 
@@ -13,7 +16,7 @@ if ($message->{"text"} == '確認') {
         'altText' => '確認ダイアログ', 
         'template' => [ 'type' => 'confirm', 'text' => '元気ですかー？', 
             'actions' => [
-                [ 'type' => 'message', 'label' => '元気です', 'text' => $message ],
+                [ 'type' => 'message', 'label' => '元気です', 'text' => '元気です' ],
                 [ 'type' => 'message', 'label' => 'まあまあです', 'text' => 'まあまあです' ], 
             ] 
         ]
@@ -61,7 +64,7 @@ if ($message->{"text"} == '確認') {
                          [ 
                             'type' => 'uri', 
                             'label' => '美容の口コミ広場を見る',
-                             'uri' => 'https://naokiyanagawa.cf/website_alpha/public_html/userPage.php?id=8'
+                             'uri' => 'https://report.clinic/'
                          ] 
                     ] 
                 ],

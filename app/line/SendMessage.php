@@ -8,8 +8,38 @@ class SendMessage extends \app\models\SendMessageSQL {
         if(isset($_POST['message-button']) ) {
 
             $this->validation();
-            
-            $message = $_POST['message'];
+
+            $message = $_POST['message']."\n\nメッセージを返信する↓\nhttps://liff.line.me/1655650638-RVMKlw1X";
+
+            $this->sendMessage($message);
+
+             $msg_info = [
+                 'event_id' => $_GET['event_id'],
+                 'sender_id' => $_SESSION['user']['userId'],
+                 'msg_content' => $_POST['message']
+             ];
+             //DBにメッセージログを保存
+             $this->setMessageLogSQL($msg_info);
+        
+        }
+
+    }
+
+    private function validation() {
+
+        if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
+            echo '<script>confirm("無効なトークンです");</script>';
+            echo '<a href="/index.php">ホーム</a>';
+            exit;
+        }
+
+    }
+
+    private function sendMessage($message) {
+
+            // if (isset()) {
+            //     # code...
+            // }
             $to = $_POST['user'];
         
             //メッセージを送る
@@ -50,35 +80,10 @@ class SendMessage extends \app\models\SendMessageSQL {
                 exit;
                 
              }
-             
-             $msg_info = [
-                 'event_id' => $_GET['event_id'],
-                 'sender_id' => $_SESSION['user']['userId'],
-                 'msg_content' => $_POST['message']
-             ];
-             
-             $this->setMessageLogSQL($msg_info);
 
-             //curl_close();
+            //curl_close();
             // セッション終了
             curl_close($ch);
-
-
-        
-        }
-
-    }
-
-    private function validation() {
-
-        if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
-            echo "
-            <script>
-            confirm('無効なトークンです');
-            </script>";
-            header('Location: ' . SITE_URL);
-            exit;
-        }
 
     }
 }

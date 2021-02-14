@@ -16,10 +16,6 @@ require_once(__DIR__ . '/../config/config.php');
     </div>
 </section>
 
-
-
-
-
 <?php require('./footer.php') ?>
 
 <style>

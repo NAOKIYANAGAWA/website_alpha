@@ -1,7 +1,12 @@
-<?php require('./header.php') ?>
+<?php 
+require_once(__DIR__ . '/../config/config.php');
+$index = new \app\controller\Index();
+$index->launch();
+require('./header.php') 
+?>
 
 <body>
-<div>Hello <span id="name">world</span>.</div>
+<?php echo '<div id="name"></div>'; ?>
 <div><span id="url"></span>.</div>
 </body>
 <script>
@@ -16,11 +21,19 @@ liffId: "1655650638-RVMKlw1X"
 liff.getProfile().then(profile => {
 
 // プロフィール名
-const name = profile.userId
+const user_id = profile.userId
 
 // HTMLに挿入
-document.querySelector("#name").innerText = name
-document.querySelector("#url").innerText = '<p>asasa</p>'
+
+$.ajax({
+    type: 'POST',
+    url: '<?php echo SITE_URL . '/website_alpha/public_html/ajax.php';?>',
+    data: "user_id="+user_id,
+    success: function(data) {
+        document.write(data);
+    }
+});
+
 })
 })
 </script>

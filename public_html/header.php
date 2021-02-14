@@ -13,7 +13,7 @@ $logout->startProcess();
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://kit.fontawesome.com/ffbdaece09.js"></script>
 <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 </head>
 <body>
 <header>
@@ -49,6 +49,7 @@ body {
     min-width: 600px;
     margin: 0px;
     background: #55efc4;
+    background: #fff;
 }
 header {
     display: flex;

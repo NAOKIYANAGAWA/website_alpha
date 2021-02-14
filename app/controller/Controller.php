@@ -43,8 +43,4 @@ class Controller {
     return isset($_SESSION['user']) && !empty($_SESSION['user']);
   }
 
-//   public function me() {
-//     return $this->isLoggedIn() ? $_SESSION['me'] : null;
-//   }
-
 }

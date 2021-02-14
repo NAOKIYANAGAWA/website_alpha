@@ -1,7 +1,5 @@
 <?php
 require_once(__DIR__ . '/../config/config.php');
-$sendMessage = new \app\line\SendMessage();
-$sendMessage->startProcess();
 $getEvent = new \app\controller\GetEvent();
 $getEvent->startProcess();
 // print_r($event);
@@ -14,26 +12,23 @@ $getEvent->startProcess();
   <div class='event-list-wrapper'>
     <table>
       <tr>
-        <th>日付</th>
+        <th>日付
+          <button　type='button' onclick="getEvent('ASC')">昇順/</button>
+          <button　type='button' onclick="getEvent('DESC')">降順</button>
+        </th>
         <th>ステータス</th>
         <th>主催者</th>
         <th>場所</th>
         <th>Lv.</th>
       </tr>
-      <?php $getEvent->generateHTML(); ?>
     </table>
   </div>
-
-</section>
-
-
-<!-- <form class="" method="post">
-  <div class=''>
-    <textarea name="message" cols="50" rows="5"></textarea>
+  <div class='event-content-wrapper'>
+    <table id='event-list-content-table'>
+     
+    </table>
   </div>
-  <input type="hidden" name="token" value="<?= h($_SESSION['token'] )?>">
-  <button type="submit" class="button" name="message-button">メッセージを送信</button>
-</form> -->
+</section>
 
 <?php require('./footer.php') ?>
 
@@ -45,15 +40,21 @@ $getEvent->startProcess();
   /* box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5); */
   margin: 50px auto;
 }
-.event-list-wrapper {
+.event-list-wrapper,
+.event-content-wrapper {
   width: 90%;
   margin: 0px auto;
 }
-.event-list-wrapper a {
+.event-list-wrapper button {
+  cursor: pointer;
+}
+.event-list-wrapper a,
+.event-content-wrapper a {
   text-decoration: none;
   color: #000;
 }
-.event-list-section table {
+.event-list-section table,
+.event-content-wrapper table {
   width:100%;
   padding: 20px 0px;
 }
@@ -62,16 +63,19 @@ $getEvent->startProcess();
   padding: 5px;
   border: 1;
 }
-.event-list-section tr {
+.event-list-section tr,
+.event-content-wrapper tr {
   
 }
-.event-list-section th {
+.event-list-section th,
+.event-content-wrapper th  {
   padding: 0px;
   padding-bottom: 10px;
   text-align: left;
   border-bottom: 1px solid #fff;
 }
-.event-list-section td {
+.event-list-section td,
+.event-content-wrapper td {
   display: table-cell;
   vertical-align: middle;
   height: 50px;
@@ -79,3 +83,25 @@ $getEvent->startProcess();
 }
 
 </style>
+
+<script>
+//ページが読み込み完了したら実行
+window.onload = function() {
+    //イベント一覧を取得
+    getEvent(null);
+
+}
+function getEvent(ASC) {
+    var post = 'type='+ASC;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://naokiyanagawa.cf/website_alpha/public_html/ajax_request/event.php');
+    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+    xhr.send(post);
+    
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('event-list-content-table').innerHTML = xhr.responseText;
+        }
+    }
+}
+</script>

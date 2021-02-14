@@ -27,5 +27,18 @@ class GetEventSQL extends \app\models\PDO {
         }
     }
 
+    protected function setEventASCSQL() {
+
+        $sql = 'select * from event ORDER BY event_date ASC';
+        
+        try {
+        return $this->selectAll($sql);
+        } catch (Exception $e) {
+        echo $e->getMessage();
+        return; 
+        }
+    }
+
+
 
 }
